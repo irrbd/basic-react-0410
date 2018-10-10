@@ -2,9 +2,21 @@ import React, { Component } from 'react'
 import Article from './article'
 import accordionDecorator from '../decorators/accordion'
 
+import DayPickerInput from 'react-day-picker/DayPickerInput'
+
+import 'react-day-picker/lib/style.css'
+
 class ArticleList extends Component {
   render() {
-    return <ul>{this.items}</ul>
+    return (
+      <div>
+        <p>From</p>
+        <DayPickerInput />
+        <p>To</p>
+        <DayPickerInput />
+        <ul>{this.items}</ul>
+      </div>
+    )
   }
 
   get items() {
