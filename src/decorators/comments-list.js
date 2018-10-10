@@ -1,4 +1,3 @@
-//HOC === Higher Order Component == Decorator
 import React, { Component } from 'react'
 
 const commentsListDecorator = (CommentsListComponent) =>
