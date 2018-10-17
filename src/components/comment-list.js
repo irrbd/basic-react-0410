@@ -3,6 +3,8 @@ import PropTypes from 'prop-types'
 import Comment from './comment'
 import ToggleOpen from '../decorators/toggleOpen'
 
+import CSSTransition from 'react-addons-css-transition-group'
+
 class CommentList extends Component {
   /*
   static defaultProps = {
@@ -23,7 +25,15 @@ class CommentList extends Component {
         <button onClick={toggleOpen} className="test--comments__btn">
           {text}
         </button>
-        {this.getBody()}
+        <CSSTransition
+          transitionAppear
+          transitionName="commentList"
+          transitionEnterTimeout={500}
+          transitionAppearTimeout={1000}
+          transitionLeaveTimeout={300}
+        >
+          {this.getBody()}
+        </CSSTransition>
       </div>
     )
   }
