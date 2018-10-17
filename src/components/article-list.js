@@ -1,8 +1,24 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import Article from './article'
 import accordionDecorator from '../decorators/accordion'
 
 export class ArticleList extends Component {
+  static propTypes = {
+    articles: PropTypes.arrayOf(
+      PropTypes.shape({
+        id: PropTypes.string.isRequired,
+        date: PropTypes.string.isRequired,
+        title: PropTypes.string.isRequired,
+        text: PropTypes.string.isRequired,
+        comments: PropTypes.array
+      }).isRequired
+    ).isRequired,
+    fetchData: PropTypes.func,
+    openItemId: PropTypes.string,
+    toggleOpenItem: PropTypes.func
+  }
+
   render() {
     return <ul>{this.items}</ul>
   }
