@@ -1,14 +1,13 @@
-import defaultArticles from '../fixtures'
 import { SET_FILTERS } from '../constants'
 
-export default (articlesState = defaultArticles, action) => {
+export default (filtersState = {}, action) => {
   const { type, payload } = action
 
   switch (type) {
     case SET_FILTERS:
-      return { ...articlesState, ...payload }
+      return { ...filtersState, ...payload }
 
     default:
-      return articlesState
+      return filtersState
   }
 }
