@@ -19,8 +19,21 @@ export class ArticleList extends Component {
   }
 
   get items() {
-    const { articles, openItemId, toggleOpenItem } = this.props
-    return articles.map((article) => (
+    const {
+      articles,
+      openItemId,
+      toggleOpenItem,
+      filters: { from, to } = {}
+    } = this.props
+    const filterArticles =
+      from && to
+        ? articles.filter((article) => {
+            const date = Date.parse(article.date)
+            return date >= Date.parse(from) && date <= Date.parse(to)
+          })
+        : articles
+
+    return filterArticles.map((article) => (
       <li key={article.id} className="test--article-list__item">
         <Article
           article={article}
@@ -39,6 +52,7 @@ export class ArticleList extends Component {
 
 const ArticleListWithAccordion = accordionDecorator(ArticleList)
 
-export default connect((state) => ({
-  articles: state.articles
+export default connect(({ articles, filters }) => ({
+  articles,
+  filters
 }))(ArticleListWithAccordion)
