@@ -1,7 +1,9 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
 import CSSTransition from 'react-addons-css-transition-group'
 import Comment from '../comment'
+import { addCommentToList, addCommentToArticle } from '../../ac'
 import toggleOpen from '../../decorators/toggleOpen'
 import './style.css'
 
@@ -11,6 +13,12 @@ class CommentList extends Component {
     //from toggleOpen decorator
     isOpen: PropTypes.bool,
     toggleOpen: PropTypes.func
+  }
+
+  state = {
+    id: 'ratatata',
+    comment: null,
+    user: null
   }
 
   /*
@@ -40,8 +48,10 @@ class CommentList extends Component {
 
   getBody() {
     const { comments = [], isOpen } = this.props
+    const { id, text, user } = this.state
     if (!isOpen) return null
 
+    // TODO Генерировать id
     return (
       <div className="test--comment-list__body">
         {comments.length ? (
@@ -49,6 +59,25 @@ class CommentList extends Component {
         ) : (
           <h3 className="test--comment-list__empty">No comments yet</h3>
         )}
+        Пользователь
+        <input
+          value={user}
+          onChange={(e) => this.setState({ user: e.target.value })}
+        />
+        Сообщение
+        <input
+          type="text"
+          value={text}
+          onChange={(e) => this.setState({ text: e.target.value })}
+        />
+        <button
+          onClick={() => {
+            this.props.addCommentToList({ id, text, user })
+            this.props.addCommentToArticle({ commentId: id })
+          }}
+        >
+          Добавить комментарий
+        </button>
       </div>
     )
   }
@@ -66,4 +95,7 @@ class CommentList extends Component {
   }
 }
 
-export default toggleOpen(CommentList)
+export default connect(
+  null,
+  { addCommentToList, addCommentToArticle }
+)(toggleOpen(CommentList))
