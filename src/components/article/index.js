@@ -3,7 +3,6 @@ import CSSTransition from 'react-addons-css-transition-group'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import CommentList from '../comment-list'
-import { createArticleSelector } from '../../selectors'
 import { deleteArticle } from '../../ac'
 import './style.css'
 
@@ -70,15 +69,7 @@ class Article extends PureComponent {
   }
 }
 
-const createMapStateToProps = () => {
-  const articleSelector = createArticleSelector()
-
-  return (state, ownProps) => ({
-    articles: articleSelector(state, ownProps)
-  })
-}
-
 export default connect(
-  createMapStateToProps,
+  null,
   { deleteArticle }
 )(Article)

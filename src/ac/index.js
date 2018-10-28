@@ -13,10 +13,10 @@ export function increment() {
   }
 }
 
-export function deleteArticle(id) {
+export function deleteArticle(articleId) {
   return {
     type: DELETE_ARTICLE,
-    payload: { id }
+    payload: { articleId }
   }
 }
 
@@ -41,9 +41,9 @@ export function addCommentToList(payload) {
   }
 }
 
-export function addCommentToArticle(id) {
+export function addCommentToArticle(payload) {
   return {
     type: ADD_COMMENT_TO_ARTICLE,
-    payload: { id }
+    payload
   }
 }

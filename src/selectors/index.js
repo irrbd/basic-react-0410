@@ -1,17 +1,11 @@
 import { createSelector } from 'reselect'
+import filter from 'lodash/filter'
 
 export const selectionSelector = (state) => state.filters.selected
 export const dateRangeSelector = (state) => state.filters.dateRange
 export const articlesSelector = (state) => state.articles
 export const commentsSelector = (state) => state.comments
 export const idSelector = (_, props) => props.id
-
-export const createArticleSelector = () =>
-  createSelector(articlesSelector, idSelector, (articles, id) => {
-    console.log(articles, 'articles')
-    console.log(id, 'id')
-    return articles[id]
-  })
 
 export const filtratedArticlesSelector = createSelector(
   selectionSelector,
@@ -21,7 +15,7 @@ export const filtratedArticlesSelector = createSelector(
     console.log('---', 'article list selector')
     const { from, to } = dateRange
 
-    return articles.filter((article) => {
+    return filter(articles, (article) => {
       const published = Date.parse(article.date)
       return (
         (!selected.length ||

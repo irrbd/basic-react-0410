@@ -1,3 +1,5 @@
+import uuidv4 from 'uuid/v4'
+
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
@@ -16,7 +18,6 @@ class CommentList extends Component {
   }
 
   state = {
-    id: 'ratatata',
     comment: null,
     user: null
   }
@@ -47,11 +48,11 @@ class CommentList extends Component {
   }
 
   getBody() {
-    const { comments = [], isOpen } = this.props
-    const { id, text, user } = this.state
+    const { articleId, comments = [], isOpen } = this.props
+    const { text, user } = this.state
     if (!isOpen) return null
 
-    // TODO Генерировать id
+    // TODO Вынести форму добавления комментария в отдельную компоненту
     return (
       <div className="test--comment-list__body">
         {comments.length ? (
@@ -72,8 +73,9 @@ class CommentList extends Component {
         />
         <button
           onClick={() => {
-            this.props.addCommentToList({ id, text, user })
-            this.props.addCommentToArticle({ commentId: id })
+            const commentId = uuidv4()
+            this.props.addCommentToList({ commentId, text, user })
+            this.props.addCommentToArticle({ articleId, commentId })
           }}
         >
           Добавить комментарий
