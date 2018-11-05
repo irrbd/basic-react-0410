@@ -29,6 +29,7 @@ class PaginationComments extends Component {
     const { comments = [], loading, pagesCount } = this.props
     const { currentPage } = this.state
 
+    // Эту проверку лучше делать на уровне CommentsPage?
     if (currentPage > pagesCount) {
       return <div>{'No comments'}</div>
     }
