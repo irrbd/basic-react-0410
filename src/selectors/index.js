@@ -20,6 +20,8 @@ export const commentsListSelector = createSelector(
 
 export const commentsPagesCountSelector = (state) => state.comments.pagesCount
 
+export const commentsLoadingSelector = (state) => state.comments.loading
+
 export const filtratedArticlesSelector = createSelector(
   selectionSelector,
   dateRangeSelector,

@@ -4,6 +4,7 @@ import { NavLink } from 'react-router-dom'
 
 import {
   commentsListSelector,
+  commentsLoadingSelector,
   commentsPagesCountSelector
 } from '../../selectors'
 
@@ -25,26 +26,32 @@ class PaginationComments extends Component {
   }
 
   render() {
-    const { comments = [], pagesCount } = this.props
+    const { comments = [], loading, pagesCount } = this.props
     const { currentPage } = this.state
 
-    console.log(pagesCount, 'pagesCount')
-    console.log(comments, 'comments')
+    if (currentPage > pagesCount) {
+      return <div>{'No comments'}</div>
+    }
+
     return (
       <div>
         <ul>
-          {comments.map((el) => (
-            <li key={el.id}>{`${el.id}: ${el.text}`}</li>
-          ))}
+          {!loading
+            ? comments.map((el) => (
+                <li key={el.id}>{`${el.id}: ${el.text}`}</li>
+              ))
+            : `Loading...`}
         </ul>
         <NavLink
-          to={`/comments/${currentPage - 1}`}
+          to={`/comments/${currentPage > 1 ? currentPage - 1 : 1}`}
           activeStyle={{ color: 'red' }}
         >
           Previous
         </NavLink>
         <NavLink
-          to={`/comments/${currentPage + 1}`}
+          to={`/comments/${
+            currentPage <= pagesCount ? currentPage + 1 : pagesCount
+          }`}
           activeStyle={{ color: 'red' }}
         >
           Next
@@ -57,8 +64,9 @@ class PaginationComments extends Component {
 export default connect(
   (state) => {
     return {
-      pagesCount: commentsPagesCountSelector(state),
-      comments: commentsListSelector(state)
+      comments: commentsListSelector(state),
+      loading: commentsLoadingSelector(state),
+      pagesCount: commentsPagesCountSelector(state)
     }
   },
   { loadComments }

@@ -101,14 +101,13 @@ export function loadComments({ limit = 5, currentPage = 0 }) {
       .then(({ total, records }) =>
         dispatch({
           type: LOAD_ALL_COMMENTS + SUCCESS,
-          payload: { pagesCount: total },
+          payload: { pagesCount: parseInt(total / limit) },
           response: records
         })
       )
       .catch((error) =>
         dispatch({
           type: LOAD_ALL_COMMENTS + FAIL,
-          payload: { offset },
           error
         })
       )
