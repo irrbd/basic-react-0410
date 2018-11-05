@@ -17,6 +17,7 @@ const CommentRecord = Record({
 // Реализованная пагинация ломает работу комментариев в связке со статьей
 const ReducerRecord = Record({
   entities: new OrderedMap({}),
+  pagesCount: null,
   loading: false,
   loaded: false,
   error: null
@@ -46,6 +47,7 @@ export default (state = new ReducerRecord(), action) => {
         state
           // Не сохраняем в store предыдущий набор статей
           .set(['entities'], arrToMap(response, CommentRecord))
+          .set('pagesCount', payload.pagesCount)
           .set('loading', false)
           .set('loaded', true)
       )

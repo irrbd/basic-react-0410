@@ -2,7 +2,10 @@ import React, { Component, Fragment } from 'react'
 import { connect } from 'react-redux'
 import { NavLink } from 'react-router-dom'
 
-import { commentsListSelector } from '../../selectors'
+import {
+  commentsListSelector,
+  commentsPagesCountSelector
+} from '../../selectors'
 
 import { loadComments } from '../../ac'
 
@@ -22,9 +25,11 @@ class PaginationComments extends Component {
   }
 
   render() {
-    const { comments = [] } = this.props
+    const { comments = [], pagesCount } = this.props
     const { currentPage } = this.state
 
+    console.log(pagesCount, 'pagesCount')
+    console.log(comments, 'comments')
     return (
       <div>
         <ul>
@@ -52,6 +57,7 @@ class PaginationComments extends Component {
 export default connect(
   (state) => {
     return {
+      pagesCount: commentsPagesCountSelector(state),
       comments: commentsListSelector(state)
     }
   },

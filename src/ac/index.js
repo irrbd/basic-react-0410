@@ -93,17 +93,16 @@ export function loadComments({ limit = 5, currentPage = 0 }) {
   const offset = currentPage * 5
   return (dispatch) => {
     dispatch({
-      type: LOAD_ALL_COMMENTS + START,
-      payload: { offset }
+      type: LOAD_ALL_COMMENTS + START
     })
 
     fetch(`/api/comment?limit=${limit}&offset=${offset}`)
       .then((res) => res.json())
-      .then((response) =>
+      .then(({ total, records }) =>
         dispatch({
           type: LOAD_ALL_COMMENTS + SUCCESS,
-          payload: { offset },
-          response: response.records
+          payload: { pagesCount: total },
+          response: records
         })
       )
       .catch((error) =>

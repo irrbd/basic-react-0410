@@ -18,6 +18,8 @@ export const commentsListSelector = createSelector(
   (commentsMap) => commentsMap.valueSeq().toArray()
 )
 
+export const commentsPagesCountSelector = (state) => state.comments.pagesCount
+
 export const filtratedArticlesSelector = createSelector(
   selectionSelector,
   dateRangeSelector,
