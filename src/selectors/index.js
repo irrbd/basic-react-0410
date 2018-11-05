@@ -9,8 +9,14 @@ export const articleListSelector = createSelector(
   articlesMapSelector,
   (articlesMap) => articlesMap.valueSeq().toArray()
 )
-export const commentsSelector = (state) => state.comments
+
+export const commentsMapSelector = (state) => state.comments.entities
 export const idSelector = (_, props) => props.id
+
+export const commentsListSelector = createSelector(
+  commentsMapSelector,
+  (commentsMap) => commentsMap.valueSeq().toArray()
+)
 
 export const filtratedArticlesSelector = createSelector(
   selectionSelector,
@@ -32,7 +38,7 @@ export const filtratedArticlesSelector = createSelector(
 )
 
 export const createCommentSelector = () =>
-  createSelector(commentsSelector, idSelector, (comments, id) => {
+  createSelector(commentsListSelector, idSelector, (comments, id) => {
     return comments.getIn(['entities', id])
   })
 

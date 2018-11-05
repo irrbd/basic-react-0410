@@ -4,6 +4,7 @@ import ArticlesPage from './routes/articles-page'
 import UserForm from './user-form'
 import Filters from './filters'
 import Counter from './counter'
+import CommentsPage from './routes/comments-page'
 
 class App extends Component {
   render() {
@@ -36,6 +37,7 @@ class App extends Component {
             render={() => <h1>New Article Page</h1>}
           />
           <Route path="/articles" component={ArticlesPage} />
+          <Route path="/comments" component={CommentsPage} />
           <Route path="*" render={() => <h1>Not Found Page</h1>} />
         </Switch>
       </div>
