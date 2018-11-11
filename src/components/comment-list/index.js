@@ -38,7 +38,7 @@ class CommentList extends Component {
 
   render() {
     const { isOpen, toggleOpen } = this.props
-    const text = (
+    const Text = (
       <LocaleConsumer>
         {(val) => (isOpen ? val.hideCommentsLabel : val.showCommentsLabel)}
       </LocaleConsumer>
@@ -46,7 +46,7 @@ class CommentList extends Component {
     return (
       <div>
         <button onClick={toggleOpen} className="test__comment-list--btn">
-          {text}
+          {Text}
         </button>
         <CSSTransition
           transitionName="comments"

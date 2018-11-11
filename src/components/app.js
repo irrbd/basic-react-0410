@@ -8,13 +8,17 @@ import Counter from './counter'
 import CommentsPage from './routes/comments-page'
 import Menu, { MenuItem } from './menu'
 import { Provider as UserProvider } from '../contexts/user'
-import { Provider as LocaleProvider, DICTIONARY } from '../contexts/locale'
-import { Consumer as LocaleConsumer } from '../contexts/locale'
+import {
+  Provider as LocaleProvider,
+  Consumer as LocaleConsumer,
+  DICTIONARY
+} from '../contexts/locale'
 
 class App extends Component {
   state = {
     user: 'roma',
-    locale: 'en'
+    locale: 'en',
+    dictionary: {}
   }
 
   setLocale = (locale) => this.setState({ locale })
@@ -22,7 +26,8 @@ class App extends Component {
   setUser = (user) => this.setState({ user })
 
   render() {
-    const { locale, user, val } = this.state
+    const { locale, user, dictionary } = this.state
+    console.log(dictionary, 'dictionary')
 
     return (
       <LocaleProvider value={DICTIONARY[locale]}>
