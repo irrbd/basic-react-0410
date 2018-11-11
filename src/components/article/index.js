@@ -7,6 +7,7 @@ import { deleteArticle, loadArticleById } from '../../ac'
 import './style.css'
 import Loader from '../common/loader'
 import { articleSelector } from '../../selectors'
+import { Consumer as LocaleConsumer } from '../../contexts/locale'
 
 class Article extends PureComponent {
   static propTypes = {
@@ -41,7 +42,9 @@ class Article extends PureComponent {
       <div>
         <h3>
           {article.title}
-          <button onClick={this.handleDeleteClick}>delete me</button>
+          <button onClick={this.handleDeleteClick}>
+            <LocaleConsumer>{(val) => val.deleteButton}</LocaleConsumer>
+          </button>
         </h3>
         <CSSTransition
           transitionAppear
