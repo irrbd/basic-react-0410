@@ -22,7 +22,6 @@ class Locale extends Component {
   }
 
   handleChange = (ev) => {
-    console.log(ev.target.value, 'ev.target.value')
     this.props.onChange(ev.target.value)
   }
 }
