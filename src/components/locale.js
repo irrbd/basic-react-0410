@@ -9,7 +9,6 @@ class Locale extends Component {
   render() {
     return (
       <FormControl component="fieldset">
-        <FormLabel component="legend">Gender</FormLabel>
         <RadioGroup
           name="locale"
           value={this.props.locale}
