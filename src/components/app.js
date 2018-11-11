@@ -39,9 +39,9 @@ class App extends Component {
               </MenuItem>
               <MenuItem link="/counter">
                 {
-                  // Возможно ли сохранять значение,
-                  // приходящее в LocaleConsumer и сохранять его в state?
+                  // Возможно ли сохранять значение, приходящее в LocaleConsumer в state?
                   // Например, в componentDidUpdate?
+                  // Чтобы избежать постоянного обращения к LocaleConsumer
                   <LocaleConsumer>{(val) => val.counterLabel}</LocaleConsumer>
                 }
               </MenuItem>
