@@ -9,6 +9,7 @@ import CommentsPage from './routes/comments-page'
 import Menu, { MenuItem } from './menu'
 import { Provider as UserProvider } from '../contexts/user'
 import { Provider as LocaleProvider, DICTIONARY } from '../contexts/locale'
+import { Consumer as LocaleConsumer } from '../contexts/locale'
 
 class App extends Component {
   state = {
@@ -21,7 +22,7 @@ class App extends Component {
   setUser = (user) => this.setState({ user })
 
   render() {
-    const { locale, user } = this.state
+    const { locale, user, val } = this.state
 
     return (
       <LocaleProvider value={DICTIONARY[locale]}>
@@ -30,9 +31,20 @@ class App extends Component {
             <Locale locale={locale} onChange={this.setLocale} />
             <Menu>
               <MenuItem link="/articles" children="Articles" />
-              <MenuItem link="/filters">Filters</MenuItem>
-              <MenuItem link="/counter">Counter</MenuItem>
-              <MenuItem link="/comments">Comments</MenuItem>
+              <MenuItem link="/filters">
+                {<LocaleConsumer>{(val) => val.filtersLabel}</LocaleConsumer>}
+              </MenuItem>
+              <MenuItem link="/counter">
+                {
+                  // Возможно ли сохранять значение,
+                  // приходящее в LocaleConsumer и сохранять его в state?
+                  // Например, в componentDidUpdate?
+                  <LocaleConsumer>{(val) => val.counterLabel}</LocaleConsumer>
+                }
+              </MenuItem>
+              <MenuItem link="/comments">
+                {<LocaleConsumer>{(val) => val.commentsLabel}</LocaleConsumer>}
+              </MenuItem>
             </Menu>
             <UserForm value={this.state.user} onChange={this.setUser} />
             <Switch>

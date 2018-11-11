@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
+import { Consumer as LocaleConsumer } from '../contexts/locale'
 
 class UserForm extends Component {
   render() {
     return (
       <div>
-        Username:{' '}
+        <LocaleConsumer>{(val) => val.usernameLabel}</LocaleConsumer>{' '}
         <input value={this.props.value} onChange={this.handleUserChange} />
       </div>
     )

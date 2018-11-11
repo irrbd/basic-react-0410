@@ -2,11 +2,16 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { createCommentSelector } from '../selectors'
+import { Consumer as LocaleConsumer } from '../contexts/locale'
 
 function Comment({ comment }) {
   return (
     <div>
-      {comment.text} <b>by {comment.user}</b>
+      {comment.text}
+      <b>
+        <LocaleConsumer>{(val) => val.byLabel}</LocaleConsumer>
+        {` ${comment.user}`}
+      </b>
     </div>
   )
 }
