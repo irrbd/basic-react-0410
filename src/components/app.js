@@ -17,8 +17,7 @@ import {
 class App extends Component {
   state = {
     user: 'roma',
-    locale: 'en',
-    dictionary: {}
+    locale: 'en'
   }
 
   setLocale = (locale) => this.setState({ locale })
@@ -26,8 +25,7 @@ class App extends Component {
   setUser = (user) => this.setState({ user })
 
   render() {
-    const { locale, user, dictionary } = this.state
-    console.log(dictionary, 'dictionary')
+    const { locale, user } = this.state
 
     return (
       <LocaleProvider value={DICTIONARY[locale]}>
